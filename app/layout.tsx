@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Footer from "./ui/footer";
 import "./globals.css";
 import { Open_Sans } from 'next/font/google';
 import Providers from "./providers";
@@ -26,6 +27,7 @@ export default function RootLayout({
       >
         <Providers>
           {children}
+          <Footer />
         </Providers>
       </body>
     </html>
