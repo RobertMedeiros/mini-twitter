@@ -1,87 +1,85 @@
 
-<body
-    class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
-    <div class="layout-container flex h-full grow flex-col">
-        <!-- Top Navigation -->
-        <header
-            class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 px-6 lg:px-40 py-3 bg-white dark:bg-background-dark">
-            <div class="flex items-center gap-4 text-primary">
-                <div class="size-8 flex items-center justify-center">
-                    <span class="material-symbols-outlined text-4xl"
-                        style="font-variation-settings: 'FILL' 1">flutter_dash</span>
+<body className="bg-[#e7f3f9] font-sans text-slate-900 min-h-screen flex flex-col">
+    <div className="flex h-full grow flex-col">
+
+        <header className="flex items-center justify-between border-b border-slate-200 px-6 lg:px-40 py-3 bg-white">
+            <div className="flex items-center gap-2 text-[#1ba0f3]">
+                <div className="size-8 flex items-center justify-center">
+                    <span
+                        className="material-symbols-outlined text-4xl [font-variation-settings:'FILL'_1]">flutter_dash</span>
                 </div>
-                <h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-tight">Social
-                </h2>
+                <h2 className="text-slate-900 text-lg font-bold leading-tight tracking-tight">Social</h2>
             </div>
-            <div class="flex flex-1 justify-end gap-8">
-                <div class="hidden md:flex items-center gap-9">
-                    <a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal"
+            <div className="flex flex-1 justify-end gap-8">
+                <div className="hidden md:flex items-center gap-9">
+                    <a className="text-slate-600 hover:text-[#1ba0f3] text-sm font-medium leading-normal"
                         href="#">Explore</a>
-                    <a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal"
+                    <a className="text-slate-600 hover:text-[#1ba0f3] text-sm font-medium leading-normal"
                         href="#">Settings</a>
                 </div>
-                <div class="flex gap-2">
+                <div className="flex gap-2">
                     <button
-                        class="flex min-w-[84px] cursor-pointer items-center justify-center rounded-full h-10 px-5 bg-primary text-white text-sm font-bold leading-normal tracking-wide hover:bg-primary/90">
-                        <span class="truncate">Sign up</span>
+                        className="flex min-w-[84px] cursor-pointer items-center justify-center rounded-full h-10 px-5 bg-[#1ba0f3] text-white text-sm font-bold leading-normal tracking-wide hover:bg-[#1ba0f3]/90 transition-colors">
+                        <span>Sign up</span>
                     </button>
                 </div>
             </div>
         </header>
-        <!-- Main Content Area -->
-        <main class="flex-1 flex items-center justify-center p-4 md:p-10 bg-primary/10 dark:bg-primary/5">
-            <div
-                class="w-full max-w-[480px] bg-white dark:bg-slate-900 rounded-xl shadow-xl border border-slate-100 dark:border-slate-800 overflow-hidden">
-                <!-- Hero Image / Header Graphic -->
-                <div class="relative h-32 md:h-40 bg-primary flex items-center justify-center overflow-hidden">
-                    <div class="absolute inset-0 opacity-20" data-alt="Subtle white dot pattern on blue background"
-                        style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 24px 24px;">
+
+        <main className="flex-1 flex items-center justify-center p-4 md:p-10">
+            <div className="w-full max-w-[480px] bg-white rounded-[2rem] shadow-xl overflow-hidden border border-slate-100">
+
+                <div className="relative h-40 bg-[#1ba0f3] flex items-center justify-center">
+
+                    <div
+                        className="absolute inset-0 opacity-20 [background-image:radial-gradient(circle_at_2px_2px,white_1px,transparent_0)] [background-size:24px_24px]">
                     </div>
-                    <span class="material-symbols-outlined text-white text-6xl relative z-10"
-                        style="font-variation-settings: 'FILL' 1">flutter_dash</span>
+                    <span
+                        className="material-symbols-outlined text-white text-7xl relative z-10 [font-variation-settings:'FILL'_1]">flutter_dash</span>
                 </div>
-                <div class="px-8 pb-12 pt-8">
-                    <h1 class="text-slate-900 dark:text-slate-100 text-3xl font-bold leading-tight text-center mb-8">Log
-                        in to Social</h1>
-                    <form class="space-y-6">
-                        <!-- Input Field: Username -->
-                        <div class="flex flex-col gap-2">
-                            <label class="text-slate-700 dark:text-slate-300 text-base font-medium">Phone, email, or
-                                username</label>
+                <div className="px-8 pb-12 pt-8">
+                    <h1 className="text-slate-900 text-3xl font-bold leading-tight text-center mb-8">Log in to Social</h1>
+                    <form className="space-y-6" onsubmit="event.preventDefault()">
+
+                        <div className="flex flex-col gap-2">
+                            <label className="text-slate-700 text-sm font-bold ml-1">Phone, email, or username</label>
                             <input
-                                class="form-input w-full rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:border-primary focus:ring-primary h-14 px-4 text-base placeholder:text-slate-400 dark:placeholder:text-slate-500"
+                                className="w-full rounded-full border-slate-200 bg-slate-50 text-slate-900 focus:border-[#1ba0f3] focus:ring-[#1ba0f3] h-14 px-6 text-base placeholder:text-slate-400 transition-all outline-none border"
                                 placeholder="Phone, email, or username" type="text" />
                         </div>
-                        <!-- Input Field: Password -->
-                        <div class="flex flex-col gap-2">
-                            <label class="text-slate-700 dark:text-slate-300 text-base font-medium">Password</label>
-                            <div class="relative flex items-center">
+
+                        <div className="flex flex-col gap-2">
+                            <label className="text-slate-700 text-sm font-bold ml-1">Password</label>
+                            <div className="relative flex items-center">
                                 <input
-                                    class="form-input w-full rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:border-primary focus:ring-primary h-14 pl-4 pr-12 text-base placeholder:text-slate-400 dark:placeholder:text-slate-500"
+                                    className="w-full rounded-full border-slate-200 bg-slate-50 text-slate-900 focus:border-[#1ba0f3] focus:ring-[#1ba0f3] h-14 pl-6 pr-12 text-base placeholder:text-slate-400 transition-all outline-none border"
                                     placeholder="Password" type="password" />
-                                <button class="absolute right-4 text-slate-400 hover:text-primary" type="button">
-                                    <span class="material-symbols-outlined">visibility</span>
+                                <button
+                                    className="absolute right-5 text-slate-400 hover:text-[#1ba0f3] flex items-center justify-center"
+                                    type="button">
+                                    <span className="material-symbols-outlined text-xl">visibility</span>
                                 </button>
                             </div>
                         </div>
-                        <!-- Action Button -->
+
                         <button
-                            class="w-full flex items-center justify-center rounded-full h-14 bg-primary text-white text-lg font-bold tracking-wide hover:bg-primary/90 shadow-md"
+                            className="w-full flex items-center justify-center rounded-full h-14 bg-[#1ba0f3] text-white text-lg font-bold tracking-wide hover:bg-[#1ba0f3]/90 shadow-md shadow-blue-200 transition-all active:scale-[0.98]"
                             type="submit">
                             Log in
                         </button>
                     </form>
-                    <!-- Secondary Actions -->
-                    <div class="mt-8 flex flex-col items-center gap-4">
-                        <a class="text-primary text-sm font-medium hover:underline" href="#">Forgot password?</a>
-                        <div class="flex items-center gap-1 text-sm text-slate-500 dark:text-slate-400">
+
+                    <div className="mt-8 flex flex-col items-center gap-4">
+                        <a className="text-[#1ba0f3] text-sm font-semibold hover:underline" href="#">Forgot password?</a>
+                        <div className="flex items-center gap-1 text-sm text-slate-500">
                             <span>Don't have an account?</span>
-                            <a class="text-primary font-bold hover:underline" href="#">Sign up for Social</a>
+                            <a className="text-[#1ba0f3] font-bold hover:underline" href="#">Sign up for Social</a>
                         </div>
                     </div>
                 </div>
             </div>
         </main>
+
     </div>
 </body>
 
