@@ -1,88 +1,206 @@
 
+
 <body
-    class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
-    <div class="layout-container flex h-full grow flex-col">
-        <!-- Top Navigation -->
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen font-sans antialiased">
+
+    <div class="max-w-4xl mx-auto min-h-screen flex flex-col">
+
         <header
-            class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 px-6 lg:px-40 py-3 bg-white dark:bg-background-dark">
-            <div class="flex items-center gap-4 text-primary">
-                <div class="size-8 flex items-center justify-center">
-                    <span class="material-symbols-outlined text-4xl"
-                        style="font-variation-settings: 'FILL' 1">flutter_dash</span>
-                </div>
-                <h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-tight">Social
-                </h2>
+            class="sticky top-0 z-20 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-6 py-4 flex items-center justify-between border-b border-slate-200 dark:border-slate-800">
+            <div class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-primary text-3xl">flutter_dash</span>
+                <h1 class="font-bold text-lg hidden sm:block">Mini Feed</h1>
             </div>
-            <div class="flex flex-1 justify-end gap-8">
-                <div class="hidden md:flex items-center gap-9">
-                    <a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal"
-                        href="#">Explore</a>
-                    <a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal"
-                        href="#">Settings</a>
+            <div class="flex-1 max-w-md mx-8 hidden md:block">
+                <div class="relative group">
+                    <span
+                        class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl">search</span>
+                    <input
+                        class="w-full bg-slate-200 dark:bg-slate-800 border-none rounded-full py-2 pl-10 pr-4 focus:ring-2 focus:ring-primary transition-all text-sm"
+                        placeholder="Search posts..." type="text" />
                 </div>
-                <div class="flex gap-2">
-                    <button
-                        class="flex min-w-[84px] cursor-pointer items-center justify-center rounded-full h-10 px-5 bg-primary text-white text-sm font-bold leading-normal tracking-wide hover:bg-primary/90">
-                        <span class="truncate">Sign up</span>
-                    </button>
+            </div>
+            <div class="flex items-center gap-4">
+                <button class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
+                    <span class="material-symbols-outlined">notifications</span>
+                </button>
+                <div class="w-9 h-9 rounded-full overflow-hidden border-2 border-primary">
+                    <img class="w-full h-full object-cover" data-alt="User profile"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwo9QuG_X1_4kmmfNLDzzC2-LveGUnBPSDtWZL16hc0s3bn7dXiILhwciOTHq80bYxMdbXXKKsfR1ecyeyuEEDqP1qOZfgU8vQr7QLb1nNh6u7U0a7JUM7Q9ECALZxXyKyJOjzZkaTNpMbMirpxN5e0dDUBijJnLOmJgQ8SCdmS-eI9wzObd8rmAae2zy4bvCzJiop7DGqo0vyKIPbvSuPUmvchv2EnOUrMI-Z0ZtqlingT6WCvLmS7UkXIaPKXLJV5Izv5sLMZ1Q" />
                 </div>
             </div>
         </header>
-        <!-- Main Content Area -->
-        <main class="flex-1 flex items-center justify-center p-4 md:p-10 bg-primary/10 dark:bg-primary/5">
-            <div
-                class="w-full max-w-[480px] bg-white dark:bg-slate-900 rounded-xl shadow-xl border border-slate-100 dark:border-slate-800 overflow-hidden">
-                <!-- Hero Image / Header Graphic -->
-                <div class="relative h-32 md:h-40 bg-primary flex items-center justify-center overflow-hidden">
-                    <div class="absolute inset-0 opacity-20" data-alt="Subtle white dot pattern on blue background"
-                        style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 24px 24px;">
-                    </div>
-                    <span class="material-symbols-outlined text-white text-6xl relative z-10"
-                        style="font-variation-settings: 'FILL' 1">flutter_dash</span>
-                </div>
-                <div class="px-8 pb-12 pt-8">
-                    <h1 class="text-slate-900 dark:text-slate-100 text-3xl font-bold leading-tight text-center mb-8">Log
-                        in to Social</h1>
-                    <form class="space-y-6">
-                        <!-- Input Field: Username -->
-                        <div class="flex flex-col gap-2">
-                            <label class="text-slate-700 dark:text-slate-300 text-base font-medium">Phone, email, or
-                                username</label>
-                            <input
-                                class="form-input w-full rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:border-primary focus:ring-primary h-14 px-4 text-base placeholder:text-slate-400 dark:placeholder:text-slate-500"
-                                placeholder="Phone, email, or username" type="text" />
+
+        <main class="flex-1 px-4 py-8 flex flex-col items-center">
+            <div class="w-full max-w-2xl space-y-6">
+
+                <div class="bg-white dark:bg-slate-900 rounded-xl p-6 shadow-sm border border-slate-200 dark:border-slate-800 transition-all">
+                    <div class="flex gap-4">
+                        <div class="w-12 h-12 rounded-full overflow-hidden shrink-0">
+                            <img alt="User" class="w-full h-full object-cover"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCET0n_-zu2mRNhBeosKnFkfD9LhhTftMSJe4TKlWXom8XM1rMx38Gel7k8z-Pk94X-VJmh0a_9wXaEBri0AOOWRQPiImO13ucozQfABV1bcZT9Q5raAUscwmzrfJWaHBSMu9orFL5X_VbrVyIm0lDZYcq53n_dWNqvm4fpKAJsVhYZ488UIJ0vV7fpXf5YtTeabUXSD_E1JWFWhe4J0wo03VmB3Inbaxwmd8T9sMLJ1_lzTOqAIsbeEx4FQT4AbBwlNhx6FwCxNyM" />
                         </div>
-                        <!-- Input Field: Password -->
-                        <div class="flex flex-col gap-2">
-                            <label class="text-slate-700 dark:text-slate-300 text-base font-medium">Password</label>
-                            <div class="relative flex items-center">
-                                <input
-                                    class="form-input w-full rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:border-primary focus:ring-primary h-14 pl-4 pr-12 text-base placeholder:text-slate-400 dark:placeholder:text-slate-500"
-                                    placeholder="Password" type="password" />
-                                <button class="absolute right-4 text-slate-400 hover:text-primary" type="button">
-                                    <span class="material-symbols-outlined">visibility</span>
+                        <div class="flex-1 space-y-4">
+                            <textarea
+                                class="w-full bg-transparent border-none focus:ring-0 text-lg resize-none placeholder-slate-500 min-h-[80px]"
+                                placeholder="What's on your mind?"></textarea>
+                            <div class="h-px bg-slate-100 dark:bg-slate-800 w-full"></div>
+                            <div class="flex justify-between items-center">
+                                <div class="flex gap-1">
+                                    <button class="p-2 rounded-full hover:bg-primary/10 text-primary transition-colors">
+                                        <span class="material-symbols-outlined text-[22px]">image</span>
+                                    </button>
+                                    <button class="p-2 rounded-full hover:bg-primary/10 text-primary transition-colors">
+                                        <span class="material-symbols-outlined text-[22px]">emoji_emotions</span>
+                                    </button>
+                                </div>
+                                <button
+                                    class="bg-primary text-white font-bold px-8 py-2.5 rounded-full hover:bg-primary/90 transition-all active:scale-95 shadow-lg shadow-primary/20">
+                                    Post
                                 </button>
                             </div>
                         </div>
-                        <!-- Action Button -->
-                        <button
-                            class="w-full flex items-center justify-center rounded-full h-14 bg-primary text-white text-lg font-bold tracking-wide hover:bg-primary/90 shadow-md"
-                            type="submit">
-                            Log in
-                        </button>
-                    </form>
-                    <!-- Secondary Actions -->
-                    <div class="mt-8 flex flex-col items-center gap-4">
-                        <a class="text-primary text-sm font-medium hover:underline" href="#">Forgot password?</a>
-                        <div class="flex items-center gap-1 text-sm text-slate-500 dark:text-slate-400">
-                            <span>Don't have an account?</span>
-                            <a class="text-primary font-bold hover:underline" href="#">Sign up for Social</a>
-                        </div>
                     </div>
                 </div>
+
+                <div class="flex items-center gap-4 px-2">
+                    <span class="text-xs font-bold uppercase tracking-widest text-slate-400">Recent Updates</span>
+                    <div class="h-px bg-slate-200 dark:bg-slate-800 flex-1"></div>
+                </div>
+
+                <article
+                    class="bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800 hover:border-primary/30 transition-all group">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full overflow-hidden bg-slate-200">
+                                    <img alt="User avatar" class="w-full h-full object-cover"
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsWJIQmf4ERVeWIVuzlOSRzy8NpQ649kEeEm2rnCD9mD02DKPGukCrgTsun21_3vtXPrPguKdNzDOlGXpFVGLhWSL8vm0ihH2R1HzX1jDtFb9ieNqB3clNJf3aIaDlKrz4RUk83r9zo2iM1SgHy9bEUZktsHNz-Ke8XjKXGDdZNSG1Qcgv6lAv9BrtOet7pmCMAvW9Nlhiqf9cI5tJ6f--067eaIRIrkdkyV9kB-aRbuPPRjfdrb6gafK4dyAoXqj9BaCT5BSSnAs" />
+                                </div>
+                                <div>
+                                    <div class="flex items-center gap-1">
+                                        <h3
+                                            class="font-bold text-sm hover:text-primary transition-colors cursor-pointer">
+                                            Design Master</h3>
+                                        <span
+                                            class="material-symbols-outlined text-primary text-[16px] [font-variation-settings:'FILL'_1]">verified</span>
+                                    </div>
+                                    <p class="text-xs text-slate-500">@design_mstr · 2h</p>
+                                </div>
+                            </div>
+                            <button class="text-slate-400 hover:text-primary transition-colors">
+                                <span class="material-symbols-outlined">more_horiz</span>
+                            </button>
+                        </div>
+                        <div class="space-y-4">
+                            <h4 class="font-bold text-lg leading-tight">Starting a new selection process! 🚀</h4>
+                            <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                                Really excited to share what we've been working on. The team has put in countless hours
+                                to make this seamless. Check out the screenshot below! #product #launch
+                            </p>
+                            <div class="rounded-lg overflow-hidden border border-slate-100 dark:border-slate-800">
+                                <img class="w-full h-auto aspect-video object-cover" data-alt="B2bit marketing visual"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUejmwH_OjlgzWoIsm0WlGUBur-HVFcf7a_S9VaB7APyfOaRUP550MHZY9LWRBez31oJ9fIIF1MOijtcgpenrmF2hGHJkPqvAh1F0mwISa-_GzInaUlH0g5xcmX-jzMt1rIcZD64LXscKE2pMw2lB6XyhKr01i49woVJW506HMJ-pI11LdnqjWZ782BXgEg0Eoku_Di8BvmnFq6mrDWC8zRpapbOVXZAjUR8GWFCVuX-KJpd9UtvrYeBvT3TLGRjjE8U_9fvsVhvE" />
+                            </div>
+                            <div class="flex items-center justify-between pt-2">
+                                <div class="flex items-center gap-6">
+                                    <button
+                                        class="flex items-center gap-2 text-slate-500 hover:text-primary transition-colors group/btn">
+                                        <div class="p-2 rounded-full group-hover/btn:bg-primary/10">
+                                            <span class="material-symbols-outlined text-[20px]">chat_bubble</span>
+                                        </div>
+                                        <span class="text-xs font-medium">48</span>
+                                    </button>
+                                    <button
+                                        class="flex items-center gap-2 text-slate-500 hover:text-green-500 transition-colors group/btn">
+                                        <div class="p-2 rounded-full group-hover/btn:bg-green-500/10">
+                                            <span class="material-symbols-outlined text-[20px]">repeat</span>
+                                        </div>
+                                        <span class="text-xs font-medium">124</span>
+                                    </button>
+                                    <button class="flex items-center gap-2 text-red-500 group/btn">
+                                        <div class="p-2 rounded-full group-hover/btn:bg-red-500/10">
+                                            <span
+                                                class="material-symbols-outlined text-[20px] [font-variation-settings:'FILL'_1]">favorite</span>
+                                        </div>
+                                        <span class="text-xs font-medium">892</span>
+                                    </button>
+                                </div>
+                                <button class="text-slate-400 hover:text-primary transition-colors">
+                                    <span class="material-symbols-outlined text-[20px]">share</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <article
+                    class="bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800 hover:border-primary/30 transition-all group">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full overflow-hidden bg-slate-200">
+                                    <img alt="User avatar" class="w-full h-full object-cover"
+                                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuATgcMvpO3f2erKzsWPAdC7qPwD06mkRU8aeHG8Ri3oxbpwsBIExAZZun3EyrYmMIbKQNhGhl503YVkd68PwDNef-1w10_wZt92TEZ9hkmznikrvzMoOfnh-qfAj4-7suKXfyCsIIsi9cpyyIzywaNAXIIFc6QNz-Q-4PaD6pLply8Xw9UdCi_HmZiAR2dnmTlkQH4B0aaS8cFSdCwQnYVS_LtezEbdjqzRpRJyFhThQERLq4ITjCRQrakLn9HXVI7YTmzrSkgAWEw" />
+                                </div>
+                                <div>
+                                    <div class="flex items-center gap-1">
+                                        <h3
+                                            class="font-bold text-sm hover:text-primary transition-colors cursor-pointer">
+                                            Sarah Tech</h3>
+                                    </div>
+                                    <p class="text-xs text-slate-500">@sarah_codes · 5h</p>
+                                </div>
+                            </div>
+                            <button class="text-slate-400 hover:text-primary transition-colors">
+                                <span class="material-symbols-outlined">more_horiz</span>
+                            </button>
+                        </div>
+                        <div class="space-y-4">
+                            <h4 class="font-bold text-lg leading-tight">Dark Mode is great!</h4>
+                            <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                                Finally switched to Tailwind CSS for all my projects. The productivity boost is real. No
+                                more jumping between files for simple styling. 🚀 #webdev #coding
+                            </p>
+                            <div class="flex items-center justify-between pt-2">
+                                <div class="flex items-center gap-6">
+                                    <button
+                                        class="flex items-center gap-2 text-slate-500 hover:text-primary transition-colors group/btn">
+                                        <div class="p-2 rounded-full group-hover/btn:bg-primary/10">
+                                            <span class="material-symbols-outlined text-[20px]">chat_bubble</span>
+                                        </div>
+                                        <span class="text-xs font-medium">12</span>
+                                    </button>
+                                    <button
+                                        class="flex items-center gap-2 text-slate-500 hover:text-green-500 transition-colors group/btn">
+                                        <div class="p-2 rounded-full group-hover/btn:bg-green-500/10">
+                                            <span class="material-symbols-outlined text-[20px]">repeat</span>
+                                        </div>
+                                        <span class="text-xs font-medium">31</span>
+                                    </button>
+                                    <button
+                                        class="flex items-center gap-2 text-slate-500 hover:text-red-500 transition-colors group/btn">
+                                        <div class="p-2 rounded-full group-hover/btn:bg-red-500/10">
+                                            <span class="material-symbols-outlined text-[20px]">favorite</span>
+                                        </div>
+                                        <span class="text-xs font-medium">456</span>
+                                    </button>
+                                </div>
+                                <button class="text-slate-400 hover:text-primary transition-colors">
+                                    <span class="material-symbols-outlined text-[20px]">share</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
             </div>
         </main>
     </div>
+
+    <button
+        class="fixed bottom-6 right-6 sm:hidden bg-primary text-white p-4 rounded-full shadow-xl shadow-primary/30 z-30 active:scale-90 transition-transform">
+        <span class="material-symbols-outlined">add</span>
+    </button>
 </body>
 
 </html>
