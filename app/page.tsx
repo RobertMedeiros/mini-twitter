@@ -11,21 +11,28 @@ import { LoginSchema, LoginData } from '@/app/schemas/auth';
 import { loginUser } from '@/app/services/authService';
 import Link from 'next/link';
 import Header from '@/app/ui/header';
+import { useRouter } from 'next/navigation';
 
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
 
-  // 1. Configura o formulário com Zod
+  
   const { register, handleSubmit, formState: { errors } } = useForm<LoginData>({
     resolver: zodResolver(LoginSchema),
   });
 
-  // 2. Configura a mutação (o envio para o back)
+  
   const { mutate, isPending, isError } = useMutation({
     mutationFn: loginUser,
     onSuccess: (data) => {
       console.log("Login realizado!", data);
+      
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+      }
+      router.push("/timeline"); // Redireciona para a timeline após o login
     },
   });
 

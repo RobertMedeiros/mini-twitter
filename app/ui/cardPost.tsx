@@ -1,46 +1,285 @@
+"use client";
 
+import { useState, useEffect } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { CiHeart } from "react-icons/ci";
+import { FaHeart } from "react-icons/fa";
+import { MdDeleteOutline, MdModeEdit } from "react-icons/md";
+import { deletePost, updatePost } from "@/app/services/postService";
+import { getCurrentUserId } from "@/app/utils/jwtHelper";
+import { useLikePost } from "@/app/hooks/useLikePost";
 
-export default function CardPost() {
+// Crie a estrutura baseada no que a sua API/BD retorna
+export interface PostData {
+    id?: string | number;
+    authorId?: string | number;
+    authorName: string;
+    authorUsername: string;
+    content: string;
+    title: string;
+    likesCount?: number;
+    likedByCurrentUser?: boolean;
+    createdAt: string;
+    image?: string;
+}
+
+export default function CardPost({ post }: { post: PostData }) {
+    const queryClient = useQueryClient();
+    const [currentUserId, setCurrentUserId] = useState<string | null>(null);
+    const [deleteError, setDeleteError] = useState("");
+    
+    // Usar o hook customizado para gerenciar likes com localStorage
+    const { isLiked, likes, handleLike, isLiking } = useLikePost(post.id!, post.likesCount || 0);
+    
+    // Estados para edição
+    const [isEditingOpen, setIsEditingOpen] = useState(false);
+    const [editTitle, setEditTitle] = useState(post.title);
+    const [editContent, setEditContent] = useState(post.content);
+    const [editImage, setEditImage] = useState<string | null>(post.image || null);
+    const [editError, setEditError] = useState("");
+
+    useEffect(() => {
+        setCurrentUserId(getCurrentUserId());
+    }, []);
+
+    const isAuthor = currentUserId && post.authorId && currentUserId === String(post.authorId);
+
+    const { mutate: handleDelete, isPending: isDeleting } = useMutation({
+        mutationFn: async () => {
+            setDeleteError("");
+            await deletePost(post.id!);
+        },
+        onSuccess: () => {
+            // Invalida a timeline para remover o post deletado
+            queryClient.invalidateQueries({ queryKey: ['timeline_posts'] });
+        },
+        onError: (err: any) => {
+            setDeleteError(err.message || "Erro ao deletar post");
+        }
+    });
+
+    const { mutate: handleUpdate, isPending: isUpdating } = useMutation({
+        mutationFn: async () => {
+            setEditError("");
+
+            // Validações
+            if (editTitle.trim().length < 3) {
+                throw new Error("Título deve ter no mínimo 3 caracteres");
+            }
+            if (editContent.trim().length < 1) {
+                throw new Error("Conteúdo é obrigatório");
+            }
+
+            if (editImage && editImage.length > 5 * 1024 * 1024) {
+                throw new Error("Imagem muito grande: Limite de 5MB");
+            }
+
+            await updatePost(post.id!, editTitle.trim(), editContent.trim(), editImage || undefined);
+        },
+        onSuccess: () => {
+            setIsEditingOpen(false);
+            // Não invalida para não desincronizar o localStorage de likes
+        },
+        onError: (err: any) => {
+            setEditError(err.message || "Erro ao atualizar post");
+        }
+    });
+
+    const handleEditImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file) {
+            if (file.size > 5 * 1024 * 1024) {
+                setEditError("Imagem muito grande: Limite de 5MB");
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                setEditImage(event.target?.result as string);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
+    const handleRemoveEditImage = () => {
+        setEditImage(null);
+    };
+
+    const handleCancelEdit = () => {
+        setIsEditingOpen(false);
+        setEditTitle(post.title);
+        setEditContent(post.content);
+        setEditImage(post.image || null);
+        setEditError("");
+    };
+
+    const isFormValid = editTitle.trim().length >= 3 && editContent.trim().length >= 1;
+
+    // Formata a data retornada pela API para um padrão mais amigável
+    const formattedDate = new Intl.DateTimeFormat('pt-BR', {
+        day: 'numeric',
+        month: 'short',
+        hour: '2-digit',
+        minute: '2-digit'
+    }).format(new Date(post.createdAt || Date.now()));
+
+    // Modal de Edição
+    if (isEditingOpen) {
+        return (
+            <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+                <div className="bg-white rounded-[2rem] shadow-xl max-w-md w-full p-6 space-y-4">
+                    <h2 className="text-xl font-bold text-slate-900">Editar Post</h2>
+
+                    <div className="space-y-3">
+                        <input
+                            type="text"
+                            value={editTitle}
+                            onChange={(e) => setEditTitle(e.target.value)}
+                            className="w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-lg px-4 py-2 outline-none focus:border-[#1ba0f3] focus:ring-1 focus:ring-[#1ba0f3] transition-all placeholder:text-slate-400"
+                            placeholder="Título do post..."
+                            disabled={isUpdating}
+                        />
+
+                        <textarea
+                            value={editContent}
+                            onChange={(e) => setEditContent(e.target.value)}
+                            className="w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-lg px-4 py-2 outline-none focus:border-[#1ba0f3] focus:ring-1 focus:ring-[#1ba0f3] transition-all placeholder:text-slate-400 resize-none"
+                            placeholder="Conteúdo do post..."
+                            rows={4}
+                            disabled={isUpdating}
+                        />
+
+                        {editImage && (
+                            <div className="relative inline-block w-full">
+                                <img
+                                    src={editImage}
+                                    alt="Preview"
+                                    className="w-full max-h-48 rounded-lg object-cover"
+                                />
+                                <button
+                                    onClick={handleRemoveEditImage}
+                                    className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full hover:bg-red-600 transition"
+                                >
+                                    ✕
+                                </button>
+                            </div>
+                        )}
+
+                        {!editImage && (
+                            <label className="flex items-center justify-center w-full px-4 py-2 border border-dashed border-slate-300 rounded-lg hover:border-[#1ba0f3] hover:bg-blue-50 transition-colors cursor-pointer">
+                                <span className="text-slate-600 text-sm">Adicionar imagem</span>
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={handleEditImageChange}
+                                    className="hidden"
+                                    disabled={isUpdating}
+                                />
+                            </label>
+                        )}
+
+                        {editError && (
+                            <p className="text-red-500 text-sm font-medium">{editError}</p>
+                        )}
+                    </div>
+
+                    <div className="flex gap-3 pt-4">
+                        <button
+                            onClick={handleCancelEdit}
+                            disabled={isUpdating}
+                            className="flex-1 px-4 py-2 rounded-lg border border-slate-200 text-slate-900 font-semibold hover:bg-slate-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                            Cancelar
+                        </button>
+                        <button
+                            onClick={() => handleUpdate()}
+                            disabled={!isFormValid || isUpdating}
+                            className={`flex-1 px-4 py-2 rounded-lg font-semibold transition-colors ${
+                                isFormValid && !isUpdating
+                                    ? "bg-[#1ba0f3] text-white hover:bg-[#1ba0f3]/90"
+                                    : "bg-slate-100 text-slate-400 cursor-not-allowed"
+                            }`}
+                        >
+                            {isUpdating ? "Atualizando..." : "Atualizar"}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
     return (
-        <article className="bg-white dark:bg-slate-900 rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800 hover:border-primary/30 transition-all group">
+        <article className="bg-white rounded-[2rem] overflow-hidden shadow-xl border border-slate-100 hover:border-[#1ba0f3]/30 transition-all group">
             <div className="p-6">
                 <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full overflow-hidden bg-slate-200">
-                            <img alt="User avatar" className="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsWJIQmf4ERVeWIVuzlOSRzy8NpQ649kEeEm2rnCD9mD02DKPGukCrgTsun21_3vtXPrPguKdNzDOlGXpFVGLhWSL8vm0ihH2R1HzX1jDtFb9ieNqB3clNJf3aIaDlKrz4RUk83r9zo2iM1SgHy9bEUZktsHNz-Ke8XjKXGDdZNSG1Qcgv6lAv9BrtOet7pmCMAvW9Nlhiqf9cI5tJ6f--067eaIRIrkdkyV9kB-aRbuPPRjfdrb6gafK4dyAoXqj9BaCT5BSSnAs" />
-                        </div>
+                    <div className="flex items-center gap-3 flex-1">
                         <div>
                             <div className="flex items-center gap-1">
-                                <h3 className="font-bold text-sm hover:text-primary transition-colors cursor-pointer">Design Master</h3>
-                                <span className="material-symbols-outlined text-primary text-[16px] [font-variation-settings:'FILL'_1]">verified</span>
+                                <h3 className="font-bold text-sm hover:text-[#1ba0f3] transition-colors cursor-pointer">{post.authorName}</h3>
                             </div>
-                            <p className="text-xs text-slate-500">@design_mstr · 2h</p>
+                            <p className="text-xs text-slate-500">@{post.authorName} · {formattedDate}</p>
                         </div>
                     </div>
-                    <button className="text-slate-400 hover:text-primary transition-colors">
-                        <span className="material-symbols-outlined">more_horiz</span>
-                    </button>
+                    {isAuthor && (
+                        <div className="flex gap-1">
+                            <button
+                                onClick={() => setIsEditingOpen(true)}
+                                disabled={isUpdating}
+                                title="Editar post"
+                                className="p-2 rounded-full hover:bg-blue-50 text-slate-500 hover:text-[#1ba0f3] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                                <MdModeEdit className="text-[20px]" />
+                            </button>
+                            <button
+                                onClick={() => handleDelete()}
+                                disabled={isDeleting}
+                                title="Deletar post"
+                                className="p-2 rounded-full hover:bg-red-50 text-slate-500 hover:text-red-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                                <MdDeleteOutline className="text-[20px]" />
+                            </button>
+                        </div>
+                    )}
                 </div>
                 <div className="space-y-4">
-                    <h4 className="font-bold text-lg leading-tight">Starting a new selection process! 🚀</h4>
-                    <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
-                        Really excited to share what we've been working on. The team has put in countless hours to make this seamless. Check out the screenshot below! #product #launch
+                    {post.title && (
+                        <h2 className="font-bold text-lg text-slate-900">{post.title}</h2>
+                    )}
+                    <p className="text-slate-600 leading-relaxed">
+                        {post.content}
                     </p>
-                    <div className="rounded-lg overflow-hidden border border-slate-100 dark:border-slate-800">
-                        <img className="w-full h-auto aspect-video object-cover" data-alt="B2bit marketing visual" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUejmwH_OjlgzWoIsm0WlGUBur-HVFcf7a_S9VaB7APyfOaRUP550MHZY9LWRBez31oJ9fIIF1MOijtcgpenrmF2hGHJkPqvAh1F0mwISa-_GzInaUlH0g5xcmX-jzMt1rIcZD64LXscKE2pMw2lB6XyhKr01i49woVJW506HMJ-pI11LdnqjWZ782BXgEg0Eoku_Di8BvmnFq6mrDWC8zRpapbOVXZAjUR8GWFCVuX-KJpd9UtvrYeBvT3TLGRjjE8U_9fvsVhvE" />
-                    </div>
+                    {post.image && (
+                        <img
+                            src={post.image}
+                            alt={post.title}
+                            className="w-full max-h-96 object-cover rounded-lg"
+                        />
+                    )}
+
+                    {deleteError && (
+                        <p className="text-red-500 text-sm font-medium">{deleteError}</p>
+                    )}
+
                     <div className="flex items-center justify-between pt-2">
                         <div className="flex items-center gap-6">
-                            <button className="flex items-center gap-2 text-red-500 group/btn">
-                                <div className="p-2 rounded-full group-hover/btn:bg-red-500/10">
-                                    <span className="material-symbols-outlined text-[20px] [font-variation-settings:'FILL'_1]">favorite</span>
+                            <button 
+                                onClick={() => handleLike()}
+                                disabled={isLiking}
+                                className={`cursor-pointer flex items-center gap-2 group/btn transition-colors ${isLiked ? 'text-red-500' : 'text-slate-500 hover:text-red-500'} ${isLiking ? 'opacity-50 cursor-not-allowed' : ''}`}
+                            >
+                                <div className={`p-2 rounded-full transition-colors ${isLiked ? 'bg-red-50' : 'group-hover/btn:bg-red-500/10'}`}>
+                                    {isLiked ? (
+                                        <FaHeart className="text-[20px] text-red-500" />
+                                    ) : (
+                                        <CiHeart className="text-[20px] text-slate-500" />
+                                    )}
                                 </div>
-                                <span className="text-xs font-medium">892</span>
+                                <span className="text-xs font-medium">{likes}</span>
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
         </article>
-    )
+    );
 }
