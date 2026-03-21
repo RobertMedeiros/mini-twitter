@@ -104,7 +104,7 @@ export default function Login() {
               <div className="mt-8 flex flex-col items-center gap-4">
                 <div className="flex items-center gap-1 text-sm text-slate-500 dark:text-slate-400">
                   <span>Não possui uma conta?</span>
-                  <Link className="text-[#1ba0f3] font-bold hover:underline" href="/cadastro">Cadastre-se na Social</Link>
+                  <Link className="text-[#1ba0f3] font-bold hover:underline" href="/cadastro">Cadastre-se no Mini Twitter</Link>
                 </div>
               </div>
             </div>

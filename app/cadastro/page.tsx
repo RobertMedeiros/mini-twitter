@@ -35,7 +35,7 @@ export default function Cadastro() {
     };
 
     return (
-        <div className="bg-[#e7f3f9] dark:bg-slate-950 font-sans text-slate-900 dark:text-slate-100 min-h-screen flex flex-col transition-colors">
+        <div className="bg-[#e7f3f9] dark:bg-slate-950 font-sans text-slate-900 dark:text-slate-100 flex-1 flex flex-col transition-colors">
       <div className="flex h-full grow flex-col">
         <Header />
         <main className="flex-1 flex items-center justify-center p-4 md:p-10">
@@ -107,7 +107,7 @@ export default function Cadastro() {
               <div className="mt-8 flex flex-col items-center gap-4">
                 <div className="flex items-center gap-1 text-sm text-slate-500 dark:text-slate-400">
                   <span>Já possui uma conta?</span>
-                  <Link className="text-[#1ba0f3] font-bold hover:underline" href="/">Faça login na Social</Link>
+                  <Link className="text-[#1ba0f3] font-bold hover:underline" href="/">Faça login no Mini Twitter</Link>
                 </div>
               </div>
             </div>

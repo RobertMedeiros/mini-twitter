@@ -73,7 +73,7 @@ export default function Timeline() {
     }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 
     return (
-        <div className="bg-[#e7f3f9] dark:bg-slate-950 font-sans text-slate-900 dark:text-slate-100 min-h-screen flex flex-col transition-colors">
+        <div className="bg-[#e7f3f9] dark:bg-slate-950 font-sans text-slate-900 dark:text-slate-100 flex-1 flex flex-col transition-colors">
             <div className="flex h-full grow flex-col">
                 <HeaderTimeline />
                 <div className="bg-[#e7f3f9] dark:bg-slate-950 flex-1 px-4 py-8 flex flex-col items-center transition-colors">
