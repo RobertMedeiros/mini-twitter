@@ -30,10 +30,12 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${josefin.className} antialiased`}
+        className={`${josefin.className} antialiased min-h-screen flex flex-col`}
       >
         <Providers>
-          {children}
+          <div className="flex-1 flex flex-col">
+            {children}
+          </div>
           <Footer />
         </Providers>
       </body>

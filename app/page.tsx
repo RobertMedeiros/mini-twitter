@@ -41,7 +41,7 @@ export default function Login() {
   };
 
   return (
-    <div className="bg-[#e7f3f9] dark:bg-slate-950 font-sans text-slate-900 dark:text-slate-100 min-h-screen flex flex-col transition-colors">
+    <div className="bg-[#e7f3f9] dark:bg-slate-950 font-sans text-slate-900 dark:text-slate-100 flex-1 flex flex-col transition-colors">
       <div className="flex h-full grow flex-col">
         <Header />
         <main className="flex-1 flex items-center justify-center p-4 md:p-10">
