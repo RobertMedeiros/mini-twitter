@@ -127,15 +127,15 @@ export default function CardPost({ post }: { post: PostData }) {
     if (isEditingOpen) {
         return (
             <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-                <div className="bg-white rounded-[2rem] shadow-xl max-w-md w-full p-6 space-y-4">
-                    <h2 className="text-xl font-bold text-slate-900">Editar Post</h2>
+                <div className="bg-white dark:bg-slate-900 rounded-[2rem] shadow-xl max-w-md w-full p-6 space-y-4 border border-slate-100 dark:border-slate-800 transition-colors">
+                    <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">Editar Post</h2>
 
                     <div className="space-y-3">
                         <input
                             type="text"
                             value={editTitle}
                             onChange={(e) => setEditTitle(e.target.value)}
-                            className="w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-lg px-4 py-2 outline-none focus:border-[#1ba0f3] focus:ring-1 focus:ring-[#1ba0f3] transition-all placeholder:text-slate-400"
+                            className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 rounded-lg px-4 py-2 outline-none focus:border-[#1ba0f3] dark:focus:border-[#1ba0f3] focus:ring-1 focus:ring-[#1ba0f3] transition-all placeholder:text-slate-400 dark:placeholder:text-slate-500"
                             placeholder="Título do post..."
                             disabled={isUpdating}
                         />
@@ -143,7 +143,7 @@ export default function CardPost({ post }: { post: PostData }) {
                         <textarea
                             value={editContent}
                             onChange={(e) => setEditContent(e.target.value)}
-                            className="w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-lg px-4 py-2 outline-none focus:border-[#1ba0f3] focus:ring-1 focus:ring-[#1ba0f3] transition-all placeholder:text-slate-400 resize-none"
+                            className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 rounded-lg px-4 py-2 outline-none focus:border-[#1ba0f3] dark:focus:border-[#1ba0f3] focus:ring-1 focus:ring-[#1ba0f3] transition-all placeholder:text-slate-400 dark:placeholder:text-slate-500 resize-none"
                             placeholder="Conteúdo do post..."
                             rows={4}
                             disabled={isUpdating}
@@ -166,8 +166,8 @@ export default function CardPost({ post }: { post: PostData }) {
                         )}
 
                         {!editImage && (
-                            <label className="flex items-center justify-center w-full px-4 py-2 border border-dashed border-slate-300 rounded-lg hover:border-[#1ba0f3] hover:bg-blue-50 transition-colors cursor-pointer">
-                                <span className="text-slate-600 text-sm">Adicionar imagem</span>
+                            <label className="flex items-center justify-center w-full px-4 py-2 border border-dashed border-slate-300 dark:border-slate-600 rounded-lg hover:border-[#1ba0f3] dark:hover:border-[#1ba0f3] hover:bg-blue-50 dark:hover:bg-[#1ba0f3]/10 transition-colors cursor-pointer">
+                                <span className="text-slate-600 dark:text-slate-400 text-sm">Adicionar imagem</span>
                                 <input
                                     type="file"
                                     accept="image/*"
@@ -187,7 +187,7 @@ export default function CardPost({ post }: { post: PostData }) {
                         <button
                             onClick={handleCancelEdit}
                             disabled={isUpdating}
-                            className="flex-1 px-4 py-2 rounded-lg border border-slate-200 text-slate-900 font-semibold hover:bg-slate-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="flex-1 px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-300 font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                             Cancelar
                         </button>
@@ -197,7 +197,7 @@ export default function CardPost({ post }: { post: PostData }) {
                             className={`flex-1 px-4 py-2 rounded-lg font-semibold transition-colors ${
                                 isFormValid && !isUpdating
                                     ? "bg-[#1ba0f3] text-white hover:bg-[#1ba0f3]/90"
-                                    : "bg-slate-100 text-slate-400 cursor-not-allowed"
+                                    : "bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500 cursor-not-allowed"
                             }`}
                         >
                             {isUpdating ? "Atualizando..." : "Atualizar"}
@@ -209,15 +209,15 @@ export default function CardPost({ post }: { post: PostData }) {
     }
 
     return (
-        <article className="bg-white rounded-[2rem] overflow-hidden shadow-xl border border-slate-100 hover:border-[#1ba0f3]/30 transition-all group">
+        <article className="bg-white dark:bg-slate-900 rounded-[2rem] overflow-hidden shadow-xl border border-slate-100 dark:border-slate-800 hover:border-[#1ba0f3]/30 dark:hover:border-[#1ba0f3]/50 transition-all group">
             <div className="p-6">
                 <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-3 flex-1">
                         <div>
                             <div className="flex items-center gap-1">
-                                <h3 className="font-bold text-sm hover:text-[#1ba0f3] transition-colors cursor-pointer">{post.authorName}</h3>
+                                <h3 className="font-bold text-sm text-slate-900 dark:text-slate-100 hover:text-[#1ba0f3] dark:hover:text-[#1ba0f3] transition-colors cursor-pointer">{post.authorName}</h3>
                             </div>
-                            <p className="text-xs text-slate-500">@{post.authorName} · {formattedDate}</p>
+                            <p className="text-xs text-slate-500 dark:text-slate-400">@{post.authorName} · {formattedDate}</p>
                         </div>
                     </div>
                     {isAuthor && (
@@ -226,7 +226,7 @@ export default function CardPost({ post }: { post: PostData }) {
                                 onClick={() => setIsEditingOpen(true)}
                                 disabled={isUpdating}
                                 title="Editar post"
-                                className="p-2 rounded-full hover:bg-blue-50 text-slate-500 hover:text-[#1ba0f3] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="p-2 rounded-full hover:bg-blue-50 dark:hover:bg-[#1ba0f3]/10 text-slate-500 dark:text-slate-400 hover:text-[#1ba0f3] dark:hover:text-[#1ba0f3] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 <MdModeEdit className="text-[20px]" />
                             </button>
@@ -234,7 +234,7 @@ export default function CardPost({ post }: { post: PostData }) {
                                 onClick={() => handleDelete()}
                                 disabled={isDeleting}
                                 title="Deletar post"
-                                className="p-2 rounded-full hover:bg-red-50 text-slate-500 hover:text-red-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="p-2 rounded-full hover:bg-red-50 dark:hover:bg-red-500/10 text-slate-500 dark:text-slate-400 hover:text-red-500 dark:hover:text-red-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 <MdDeleteOutline className="text-[20px]" />
                             </button>
@@ -243,9 +243,9 @@ export default function CardPost({ post }: { post: PostData }) {
                 </div>
                 <div className="space-y-4">
                     {post.title && (
-                        <h2 className="font-bold text-lg text-slate-900">{post.title}</h2>
+                        <h2 className="font-bold text-lg text-slate-900 dark:text-slate-100">{post.title}</h2>
                     )}
-                    <p className="text-slate-600 leading-relaxed">
+                    <p className="text-slate-600 dark:text-slate-300 leading-relaxed">
                         {post.content}
                     </p>
                     {post.image && (
@@ -265,16 +265,16 @@ export default function CardPost({ post }: { post: PostData }) {
                             <button 
                                 onClick={() => handleLike()}
                                 disabled={isLiking}
-                                className={`cursor-pointer flex items-center gap-2 group/btn transition-colors ${isLiked ? 'text-red-500' : 'text-slate-500 hover:text-red-500'} ${isLiking ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                className={`cursor-pointer flex items-center gap-2 group/btn transition-colors ${isLiked ? 'text-red-500' : 'text-slate-500 dark:text-slate-400 hover:text-red-500 dark:hover:text-red-500'} ${isLiking ? 'opacity-50 cursor-not-allowed' : ''}`}
                             >
-                                <div className={`p-2 rounded-full transition-colors ${isLiked ? 'bg-red-50' : 'group-hover/btn:bg-red-500/10'}`}>
+                                <div className={`p-2 rounded-full transition-colors ${isLiked ? 'bg-red-50 dark:bg-red-500/10' : 'group-hover/btn:bg-red-500/10'}`}>
                                     {isLiked ? (
                                         <FaHeart className="text-[20px] text-red-500" />
                                     ) : (
-                                        <CiHeart className="text-[20px] text-slate-500" />
+                                        <CiHeart className="text-[20px] text-slate-500 dark:text-slate-400" />
                                     )}
                                 </div>
-                                <span className="text-xs font-medium">{likes}</span>
+                                <span className="text-xs font-medium dark:text-slate-300">{likes}</span>
                             </button>
                         </div>
                     </div>

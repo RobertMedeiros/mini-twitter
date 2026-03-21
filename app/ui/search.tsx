@@ -31,9 +31,9 @@ export default function Search() {
     return (
         <div className="flex-1 max-w-md mx-8 hidden md:block">
             <div className="relative group">
-                <FaSearch className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl" />
+                <FaSearch className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 dark:text-slate-500 text-xl" />
                 <input 
-                    className="w-full bg-slate-50 border border-slate-200 text-slate-900 rounded-full py-2 pl-10 pr-4 outline-none focus:border-[#1ba0f3] focus:ring-1 focus:ring-[#1ba0f3] transition-all text-sm placeholder:text-slate-400" 
+                    className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 rounded-full py-2 pl-10 pr-4 outline-none focus:border-[#1ba0f3] dark:focus:border-[#1ba0f3] focus:ring-1 focus:ring-[#1ba0f3] transition-all text-sm placeholder:text-slate-400 dark:placeholder:text-slate-500" 
                     placeholder="Pesquise posts..." 
                     type="text"
                     value={localValue}
@@ -42,7 +42,7 @@ export default function Search() {
                 {localValue && (
                     <button
                         onClick={handleClear}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 text-sm"
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 text-sm"
                     >
                         ✕
                     </button>

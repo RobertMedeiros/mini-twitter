@@ -41,11 +41,11 @@ export default function Login() {
   };
 
   return (
-    <div className="bg-[#e7f3f9] font-sans text-slate-900 min-h-screen flex flex-col">
+    <div className="bg-[#e7f3f9] dark:bg-slate-950 font-sans text-slate-900 dark:text-slate-100 min-h-screen flex flex-col transition-colors">
       <div className="flex h-full grow flex-col">
         <Header />
         <main className="flex-1 flex items-center justify-center p-4 md:p-10">
-          <div className="w-full max-w-[480px] bg-white rounded-[2rem] shadow-xl overflow-hidden border border-slate-100">
+          <div className="w-full max-w-[480px] bg-white dark:bg-slate-900 rounded-[2rem] shadow-xl overflow-hidden border border-slate-100 dark:border-slate-800 transition-colors">
 
             <div className="relative h-40 bg-[#1ba0f3] flex items-center justify-center">
 
@@ -57,12 +57,12 @@ export default function Login() {
             <div className="px-8 pb-12 pt-8">
               <div className="text-left mb-8">
                 <h1 className="text-[#1ba0f3] text-3xl font-bold leading-tight">Olá, de novo!</h1>
-                <p className="text-slate-500">Por favor insira suas credenciais para fazer login.</p>
+                <p className="text-slate-500 dark:text-slate-400">Por favor insira suas credenciais para fazer login.</p>
               </div>
               <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
                 
                 {isError && (
-                  <div className="text-red-500 text-sm font-semibold text-center bg-red-50 p-3 rounded-xl border border-red-100">
+                  <div className="text-red-500 text-sm font-semibold text-center bg-red-50 dark:bg-red-500/10 p-3 rounded-xl border border-red-100 dark:border-red-500/20">
                     E-mail ou senha incorretos.
                   </div>
                 )}
@@ -71,7 +71,7 @@ export default function Login() {
                   <label className="text-[#1ba0f3] text-sm font-bold ml-1">E-mail</label>
                   <input
                     {...register("email")}
-                    className="w-full rounded-full border-slate-200 bg-slate-50 text-slate-900 focus:border-[#1ba0f3] focus:ring-[#1ba0f3] h-14 px-6 text-base placeholder:text-slate-400 transition-all outline-none border"
+                    className="w-full rounded-full border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:border-[#1ba0f3] dark:focus:border-[#1ba0f3] focus:ring-[#1ba0f3] h-14 px-6 text-base placeholder:text-slate-400 dark:placeholder:text-slate-500 transition-all outline-none border"
                     placeholder="Insira seu e-mail" type="text" />
                   {errors.email && <span className="text-red-500 text-sm ml-2">{errors.email.message}</span>}
                 </div>
@@ -81,7 +81,7 @@ export default function Login() {
                   <div className="relative flex items-center">
                     <input
                       {...register("password")}
-                      className="w-full rounded-full border-slate-200 bg-slate-50 text-slate-900 focus:border-[#1ba0f3] focus:ring-[#1ba0f3] h-14 pl-6 pr-12 text-base placeholder:text-slate-400 transition-all outline-none border"
+                      className="w-full rounded-full border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:border-[#1ba0f3] dark:focus:border-[#1ba0f3] focus:ring-[#1ba0f3] h-14 pl-6 pr-12 text-base placeholder:text-slate-400 dark:placeholder:text-slate-500 transition-all outline-none border"
                       placeholder="Insira sua senha" type={showPassword ? "text" : "password"} />
                     <button
                       className="absolute right-5 text-slate-400 hover:text-[#1ba0f3] flex items-center justify-center"
@@ -102,7 +102,7 @@ export default function Login() {
               </form>
 
               <div className="mt-8 flex flex-col items-center gap-4">
-                <div className="flex items-center gap-1 text-sm text-slate-500">
+                <div className="flex items-center gap-1 text-sm text-slate-500 dark:text-slate-400">
                   <span>Não possui uma conta?</span>
                   <Link className="text-[#1ba0f3] font-bold hover:underline" href="/cadastro">Cadastre-se na Social</Link>
                 </div>

@@ -21,9 +21,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if (localStorage.theme === 'dark') {
+                document.documentElement.classList.add('dark')
+              }
+            `,
+          }}
+        />
+      </head>
       <body
-        className={`${openSans.variable}} antialiased`}
+        className={`${openSans.variable} antialiased`}
       >
         <Providers>
           {children}

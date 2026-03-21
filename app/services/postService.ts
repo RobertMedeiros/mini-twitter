@@ -1,12 +1,15 @@
 import { PostData } from '@/app/ui/cardPost';
 import { api } from '@/app/lib/api';
 
-export async function fetchTimelinePosts(search?: string): Promise<PostData[]> {
+export async function fetchTimelinePosts(search?: string, page: number = 1): Promise<PostData[]> {
     // Recupera o token salvo no localStorage durante o login
     // A checagem typeof window é importante no Next.js para evitar erros no servidor (SSR)
     const token = typeof window !== 'undefined' ? localStorage.getItem("token") : null;
 
-    const params = search ? { search } : {};
+    const params = {
+        page,
+        ...(search ? { search } : {})
+    };
 
     const response = await api.get('/posts', {
         params,

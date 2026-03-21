@@ -1,4 +1,5 @@
 import { PiBird } from "react-icons/pi";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Header() {
     return (
@@ -9,11 +10,8 @@ export default function Header() {
                 </div>
             </div>
             <div className="flex flex-1 justify-end gap-8">
-                <div className="hidden md:flex items-center gap-9">
-                    <a className="text-slate-600 hover:text-[#1ba0f3] text-sm font-medium leading-normal"
-                        href="#">Settings</a>
-                </div>
                 <div className="flex gap-2">
+                    <ThemeToggle />
                 </div>
             </div>
         </header>

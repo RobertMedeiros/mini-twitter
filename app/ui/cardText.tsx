@@ -67,21 +67,21 @@ export default function CardText() {
     const isFormValid = title.trim().length >= 3 && content.trim().length >= 1;
 
     return (
-        <div className="bg-white rounded-[2rem] p-6 shadow-xl border border-slate-100 transition-all">
+        <div className="bg-white dark:bg-slate-900 rounded-[2rem] p-6 shadow-xl border border-slate-100 dark:border-slate-800 transition-all">
             <div className="flex gap-4">
                 <div className="flex-1 space-y-4">
                     <input
                         type="text"
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
-                        className="w-full bg-transparent border-none focus:ring-0 outline-none text-slate-900 font-semibold text-lg placeholder:text-slate-400"
+                        className="w-full bg-transparent border-none focus:ring-0 outline-none text-slate-900 dark:text-slate-100 font-semibold text-lg placeholder:text-slate-400 dark:placeholder:text-slate-500"
                         placeholder="Título do post..."
                         disabled={isPending}
                     />
                     <textarea
                         value={content}
                         onChange={(e) => setContent(e.target.value)}
-                        className="w-full bg-transparent border-none focus:ring-0 outline-none text-slate-900 text-lg resize-none placeholder:text-slate-400"
+                        className="w-full bg-transparent border-none focus:ring-0 outline-none text-slate-900 dark:text-slate-100 text-lg resize-none placeholder:text-slate-400 dark:placeholder:text-slate-500"
                         placeholder="O que está em sua mente?"
                         rows={4}
                         disabled={isPending}
@@ -107,10 +107,10 @@ export default function CardText() {
                         <p className="text-red-500 text-sm font-medium">{error}</p>
                     )}
 
-                    <div className="h-px bg-slate-100 w-full"></div>
+                    <div className="h-px bg-slate-100 dark:bg-slate-800 w-full"></div>
                     <div className="flex justify-between items-center">
                         <div className="flex gap-1">
-                            <label className="cursor-pointer p-2 rounded-full hover:bg-[#1ba0f3]/10 text-[#1ba0f3] transition-colors">
+                            <label className="cursor-pointer p-2 rounded-full hover:bg-[#1ba0f3]/10 text-[#1ba0f3] dark:text-[#1ba0f3] transition-colors">
                                 <FaRegImage className="material-symbols-outlined text-[22px]" />
                                 <input
                                     type="file"
@@ -127,7 +127,7 @@ export default function CardText() {
                             className={`cursor-pointer font-bold px-8 py-2.5 rounded-full transition-all active:scale-[0.98] shadow-md ${
                                 isFormValid && !isPending
                                     ? "bg-[#1ba0f3] text-white hover:bg-[#1ba0f3]/90"
-                                    : "bg-slate-100 text-slate-400 cursor-not-allowed"
+                                    : "bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500 cursor-not-allowed shadow-none"
                             }`}
                         >
                             {isPending ? "Postando..." : "Post"}

@@ -1,2 +1,8 @@
+/* app/globals.css */
+
 @import "tailwindcss";
 
+/* Adicione esta linha para habilitar o dark mode através da classe .dark */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ... restante do seu código CSS ... */

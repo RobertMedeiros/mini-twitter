@@ -2,6 +2,7 @@
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { SearchProvider } from "@/app/contexts/SearchContext";
+import { ThemeProvider } from "@/app/contexts/ThemeContext";
 import { useState } from "react";
 
 export default function Providers({ children }: { children: React.ReactNode }) {
@@ -11,9 +12,11 @@ export default function Providers({ children }: { children: React.ReactNode }) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <SearchProvider>
-        {children}
-      </SearchProvider>
+      <ThemeProvider>
+        <SearchProvider>
+          {children}
+        </SearchProvider>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }
