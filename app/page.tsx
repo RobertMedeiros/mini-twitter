@@ -52,7 +52,7 @@ export default function Login() {
               <div
                 className="absolute inset-0 opacity-20 [background-image:radial-gradient(circle_at_2px_2px,white_1px,transparent_0)] [background-size:24px_24px]">
               </div>
-              <h2 className="text-white text-4xl leading-tight tracking-tight">Mini Twitter</h2>
+              <h2 className="text-white text-4xl leading-tight font-bold tracking-tight">Mini Twitter</h2>
             </div>
             <div className="px-8 pb-12 pt-8">
               <div className="text-left mb-8">
